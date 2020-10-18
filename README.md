@@ -66,7 +66,7 @@ And get all items for the Menu
 // Get all items from Menu
 $items = $menu->items();
 ```
-You can get a specific item by using search methods. See [Search an item](#search-an-item).
+You can get a specific item by using search methods. See [Search for item](#search-for-item).
 
 ### Menu hierarchy
 Menus Manager lets you create multi-level menus. Each Menu item can have as many children as you want. See [Menu Item](#menu-item) to find out how to create a new Menu Item.
