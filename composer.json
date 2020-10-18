@@ -1,0 +1,45 @@
+{
+    "name": "hexadog/laravel-menus-manager",
+    "description": "Dynamic Menus Management package for your Laravel application",
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/hexadog/laravel-menus-manager/issues",
+        "source": "https://github.com/hexadog/laravel-menus-manager"
+    },
+    "authors": [
+        {
+            "name": "Gaetan",
+            "email": "gaetan@hexadog.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "illuminate/routing": "^7.0|^8.0",
+        "illuminate/support": "^7.0|^8.0",
+        "illuminate/view": "^7.0|^8.0"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "3.*",
+        "phpunit/phpunit": "^7.0|^8.0|^9.0",
+        "orchestra/testbench": "~5.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Hexadog\\MenusManager\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Hexadog\\MenusManager\\Providers\\PackageServiceProvider"
+            ],
+            "dont-discover": []
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test:windows": "vendor\\bin\\phpunit",
+        "check-style": "vendor/bin/phpcs --extensions=php ./src",
+        "fix-style": "vendor/bin/phpcbf --extensions=php ./src"
+    }
+}
