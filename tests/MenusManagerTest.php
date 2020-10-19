@@ -30,6 +30,14 @@ class MenusManagerTest extends TestCase
     }
 
     /** @test */
+    public function it_makes_multiple_menu()
+    {
+        Menus::register('secondary');
+
+        self::assertEquals(2, Menus::count());
+    }
+
+    /** @test */
     public function it_makes_a_menu_singleton()
     {
         $menu2 = Menus::register('main');
@@ -204,5 +212,46 @@ class MenusManagerTest extends TestCase
         self::assertEquals('http://localhost', $menuItem->getUrl());
         self::assertEquals('http://localhost/contact', $menuItem2->getUrl());
         self::assertEquals('http://localhost/contact?type=support', $menuItem3->getUrl());
+    }
+
+    /** @test */
+    public function it_can_get_item_as_array()
+    {
+        $menuItem = new Item();
+        $itemAsArray = [
+            'attributes' => $menuItem->attributes,
+            'active' => false,
+            'children' => [],
+            'icon' => '',
+            'order' => 0,
+            'title' => '',
+            'type' => 'link',
+            'url' => ''
+        ];
+
+        self::assertEquals($itemAsArray, $menuItem->toArray());
+    }
+
+    /** @test */
+    public function it_can_get_menu_as_array()
+    {
+        $menuItem = $this->menu->add();
+        $itemAsArray = [
+            'name' => 'main',
+            'items' => [
+                0 => [
+                    'attributes' => $menuItem->attributes,
+                    'active' => false,
+                    'children' => [],
+                    'icon' => '',
+                    'order' => 0,
+                    'title' => '',
+                    'type' => 'link',
+                    'url' => ''
+                ]
+            ]
+        ];
+
+        self::assertEquals($itemAsArray, $this->menu->toArray());
     }
 }
