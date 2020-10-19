@@ -28,6 +28,11 @@
             "Hexadog\\MenusManager\\": "src"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Hexadog\\MenusManager\\Tests\\": "tests"
+        }
+    },
     "extra": {
         "laravel": {
             "providers": [

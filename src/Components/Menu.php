@@ -42,6 +42,10 @@ class Menu extends Component
      */
     public function render()
     {
-        return view('menus-manager::components.menu');
+        if ($this->menu) {
+            return view('menus-manager::components.menu');
+        }
+
+        return '';
     }
 }

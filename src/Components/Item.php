@@ -32,7 +32,7 @@ class Item extends Component
      */
     public function render()
     {
-        if ($this->item->isVisible()) {
+        if ($this->item && $this->item->isVisible()) {
             if ($this->item->isHeader()) {
                 return view('menus-manager::components.header');
             }

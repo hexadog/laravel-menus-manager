@@ -74,6 +74,10 @@ class Item implements Arrayable
      */
     public function __get($key)
     {
+        if ($key === 'properties') {
+            return $this->properties;
+        }
+
         return Arr::get($this->properties, $key);
     }
     
@@ -142,13 +146,13 @@ class Item implements Arrayable
     /**
      * Get the item attributes as HTML String
      *
-     * @param array $attributes
+     * @param mixed $except
      *
      * @return string
      */
-    public function getAttributes(array $attributes = [])
+    public function getAttributes($except = null)
     {
-        return $this->htmlAttributes(array_merge($this->attributes, $attributes));
+        return $this->htmlAttributes(Arr::except($this->attributes, $except));
     }
 
     /**
