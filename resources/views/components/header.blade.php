@@ -1,4 +1,4 @@
-<div x-data="{ open: {{ $item->isActive() }} }">
+<div x-data="{ open: {{ $item->isActive() ? 'true' : 'false' }} }">
     @if($item->haschildren())
     <button @click="open = !open" {{ $attributes->merge($item->attributes) }}>
         <span class="flex items-center">

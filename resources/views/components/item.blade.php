@@ -1,6 +1,6 @@
 @if($item->haschildren())
-<div x-data="{ open: {{ $item->isActive() }} }" {{ $attributes->merge($item->attributes) }}>
-    <button @click="open = !open">
+<div x-data="{ open: {{ $item->isActive() ? 'true' : 'false' }} }" {{ $attributes->merge($item->attributes) }}>
+    <button @click="open = !open" class="flex justify-between items-center">
         <span class="flex items-center">
             <x-menus-icon class="h-5 w-5" :item="$item" />
             <span class="mx-4">{{ $item->title }}</span>
