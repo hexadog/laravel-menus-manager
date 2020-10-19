@@ -33,7 +33,7 @@ class Divider extends Component
      */
     public function render()
     {
-        if ($this->item->isVisible()) {
+        if ($this->item && $this->item->isVisible()) {
             return view('menus-manager::components.divider');
         }
 
