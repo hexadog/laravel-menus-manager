@@ -12,14 +12,14 @@ class Icon extends Component
      *
      * @var string
      */
-    protected $icon;
+    public $icon;
 
     /**
      * The item
      *
      * @var Item
      */
-    protected $item;
+    public $item;
 
     /**
      * Create the component instance
@@ -28,10 +28,10 @@ class Icon extends Component
      *
      * @return void
      */
-    public function __construct(Item $item = null)
+    public function __construct(Item $item)
     {
         $this->item = $item;
-        $this->icon = $item->hasIcon() ? $item->icon : null;
+        $this->icon = $item && $item->hasIcon() ? $item->icon : null;
     }
 
     /**
@@ -41,7 +41,7 @@ class Icon extends Component
      */
     public function render()
     {
-        if ($this->icon) {
+        if ($this->item && $this->icon) {
             return view('menus-manager::components.icon');
         }
 
