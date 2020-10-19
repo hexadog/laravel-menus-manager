@@ -304,6 +304,7 @@ php artisan vendor:publish --provider="Hexadog\MenusManager\Providers\PackageSer
 
 <!-- omit in toc -->
 ## Credits
+- This package is inspired by the work of [rinvex/laravel-menus](https://github.com/rinvex/laravel-menus)
 - Logo made by [DesignEvo free logo creator](https://www.designevo.com/logo-maker/)
 
 <!-- omit in toc -->
