@@ -2,6 +2,6 @@
     @isset($slot)
     {{ $slot }}
     @else
-    <i class="{{ $icon }}"></i>
+    {{ $icon }}
     @endif
 </div>

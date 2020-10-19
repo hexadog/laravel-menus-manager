@@ -1,9 +1,9 @@
 @if($item->haschildren())
-<div x-data="{ open: false }" {{ $attributes->merge($item->attributes) }}>
+<div x-data="{ open: {{ $item->isActive() }} }" {{ $attributes->merge($item->attributes) }}>
     <button @click="open = !open">
         <span class="flex items-center">
             <x-menus-icon class="h-5 w-5" :item="$item" />
-            <span class="mx-4 font-medium">{{ $item->title }}</span>
+            <span class="mx-4">{{ $item->title }}</span>
         </span>
         
         <span>
@@ -19,6 +19,6 @@
 @else
 <a {{ $attributes->merge($item->attributes)->merge(['href' => $item->getUrl()]) }}>
     <x-menus-icon class="h-5 w-5" :item="$item" />
-    <span class="mx-4 font-medium">{{ $item->title }}</span>
+    <span class="mx-4">{{ $item->title }}</span>
 </a>
 @endif

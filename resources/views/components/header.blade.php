@@ -1,9 +1,9 @@
-<div x-data="{ open: false }">
+<div x-data="{ open: {{ $item->isActive() }} }">
     @if($item->haschildren())
     <button @click="open = !open" {{ $attributes->merge($item->attributes) }}>
         <span class="flex items-center">
             <x-menus-icon class="h-5 w-5" :item="$item" />
-            <span class="mx-4 font-medium">{{ $item->title }}</span>
+            <span class="mx-4">{{ $item->title }}</span>
         </span>
         
         <span>
