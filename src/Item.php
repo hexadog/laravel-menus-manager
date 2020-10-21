@@ -30,7 +30,7 @@ class Item implements Arrayable
     protected $properties = [
         'attributes'    => [],
         'icon'          => null,
-        'order'         => 0,
+        'order'         => 9000,
         'route'         => null,
         'title'         => '',
         'type'          => 'link', // link | divider | header
