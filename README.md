@@ -1,8 +1,11 @@
-<p align="center"><img src="https://i.ibb.co/31yzFSw/logo.png"></p>
+<p align="center"><img src="https://i.ibb.co/NjHCx4X/laravel-menus-manager.png" height="192"></p>
 
 <p align="center">
     <a href="https://packagist.org/packages/hexadog/laravel-menus-manager">
         <img src="https://poser.pugx.org/hexadog/laravel-menus-manager/v" alt="Latest Stable Version">
+    </a>
+    <a href="https://packagist.org/packages/hexadog/laravel-menus-manager">
+        <img src="https://poser.pugx.org/hexadog/laravel-menus-manager/circleci" alt="CircleCI Build">
     </a>
     <a href="https://packagist.org/packages/hexadog/laravel-menus-manager">
         <img src="https://poser.pugx.org/hexadog/laravel-menus-manager/downloads" alt="Total Downloads">
