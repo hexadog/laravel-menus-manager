@@ -222,8 +222,8 @@ class MenusManagerTest extends TestCase
             'attributes' => $menuItem->attributes,
             'active' => false,
             'children' => [],
-            'icon' => '',
-            'order' => 0,
+            'icon' => null,
+            'order' => 9000,
             'title' => '',
             'type' => 'link',
             'url' => ''
@@ -243,8 +243,8 @@ class MenusManagerTest extends TestCase
                     'attributes' => $menuItem->attributes,
                     'active' => false,
                     'children' => [],
-                    'icon' => '',
-                    'order' => 0,
+                    'icon' => null,
+                    'order' => 9000,
                     'title' => '',
                     'type' => 'link',
                     'url' => ''
