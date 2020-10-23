@@ -5,6 +5,9 @@
         <img src="https://poser.pugx.org/hexadog/laravel-menus-manager/v" alt="Latest Stable Version">
     </a>
     <a href="https://packagist.org/packages/hexadog/laravel-menus-manager">
+        <img src="https://poser.pugx.org/hexadog/laravel-menus-manager/circleci" alt="CircleCI Build">
+    </a>
+    <a href="https://packagist.org/packages/hexadog/laravel-menus-manager">
         <img src="https://poser.pugx.org/hexadog/laravel-menus-manager/downloads" alt="Total Downloads">
     </a>
     <a href="https://packagist.org/packages/hexadog/laravel-themes-manager">
