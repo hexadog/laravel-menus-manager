@@ -48,5 +48,7 @@ jobs:
           paths:
             - node_modules
 
-      # run tests with phpunit or codecept
+      # run code sniffer auto-fix with phpcbf
+      - run: ./vendor/bin/phpcbf --extensions=php ./src
+      # run tests with phpunit
       - run: ./vendor/bin/phpunit
