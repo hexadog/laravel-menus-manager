@@ -2,10 +2,10 @@
 
 namespace Hexadog\MenusManager;
 
-use Illuminate\Support\Arr;
-use Illuminate\Support\Collection;
 use Hexadog\MenusManager\Traits\HasItems;
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
@@ -28,13 +28,13 @@ class Item implements Arrayable
      * @var array
      */
     protected $properties = [
-        'attributes'    => [],
-        'icon'          => null,
-        'order'         => 9000,
-        'route'         => null,
-        'title'         => '',
-        'type'          => 'link', // link | divider | header
-        'url'           => null,
+        'attributes' => [],
+        'icon' => null,
+        'order' => 9000,
+        'route' => null,
+        'title' => '',
+        'type' => 'link', // link | divider | header
+        'url' => null,
     ];
 
     /**
@@ -101,7 +101,7 @@ class Item implements Arrayable
     public function asHeader(): Item
     {
         return $this->fill([
-            'type' => 'header'
+            'type' => 'header',
         ]);
     }
     
@@ -113,7 +113,7 @@ class Item implements Arrayable
     public function asDivider(): Item
     {
         return $this->fill([
-            'type' => 'divider'
+            'type' => 'divider',
         ]);
     }
     
@@ -194,11 +194,11 @@ class Item implements Arrayable
     /**
      * Check if icon is set for the current item
      *
-     * @return boolean
+     * @return bool
      */
     public function hasIcon(): bool
     {
-        return !is_null($this->icon);
+        return ! is_null($this->icon);
     }
 
     /**
@@ -251,7 +251,7 @@ class Item implements Arrayable
      */
     public function isHidden(): bool
     {
-        return !$this->isVisible();
+        return ! $this->isVisible();
     }
 
     /**
@@ -289,7 +289,7 @@ class Item implements Arrayable
      */
     public function if($callback): Item
     {
-        if (!is_callable($callback)) {
+        if (! is_callable($callback)) {
             $callback = function () use ($callback) {
                 return $callback;
             };
@@ -303,7 +303,7 @@ class Item implements Arrayable
     /**
      * Set the current item order
      *
-     * @param integer $order
+     * @param int $order
      *
      * @return Item
      */
@@ -367,6 +367,7 @@ class Item implements Arrayable
             if (is_bool($attributes[$key])) {
                 return $attributes[$key] ? $key : '';
             }
+
             return $key . '="' . $attributes[$key] . '"';
         }, array_keys($attributes))));
     }
@@ -386,7 +387,7 @@ class Item implements Arrayable
             'order' => $this->order,
             'title' => $this->title,
             'type' => $this->type,
-            'url' => $this->getUrl()
+            'url' => $this->getUrl(),
         ];
     }
 }

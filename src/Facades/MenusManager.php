@@ -2,8 +2,8 @@
 
 namespace Hexadog\MenusManager\Facades;
 
-use Illuminate\Support\Facades\Facade;
 use Hexadog\MenusManager\MenusManager as Manager;
+use Illuminate\Support\Facades\Facade;
 
 class MenusManager extends Facade
 {

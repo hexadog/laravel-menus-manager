@@ -55,7 +55,7 @@ class Menu implements Arrayable
     {
         return [
             'name' => $this->name,
-            'items' => $this->items->toArray()
+            'items' => $this->items->toArray(),
         ];
     }
 }
