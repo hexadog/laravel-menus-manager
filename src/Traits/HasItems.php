@@ -65,7 +65,7 @@ trait HasItems
      */
     public function findByTitleOrAdd(string $title, array $attributes = []): ?Item
     {
-        if (!($item = $this->findBy('title', $title))) {
+        if (! ($item = $this->findBy('title', $title))) {
             $item = $this->add(compact('title', 'attributes'));
         }
 
@@ -110,6 +110,7 @@ trait HasItems
     {
         return $this->add(compact('route', 'title', 'attributes'));
     }
+
     /**
      * Register new menu item using url
      *
@@ -134,8 +135,8 @@ trait HasItems
      */
     public function __call($method_name, $args)
     {
-        if (!method_exists($this, $method_name)) {
-            return call_user_func_array(array($this->items, $method_name), $args);
+        if (! method_exists($this, $method_name)) {
+            return call_user_func_array([$this->items, $method_name], $args);
         }
     }
 }

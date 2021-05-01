@@ -2,15 +2,15 @@
 
 namespace Hexadog\MenusManager\Providers;
 
-use ReflectionClass;
-use Illuminate\Support\Str;
-use Illuminate\Routing\Router;
 use Hexadog\MenusManager\Components;
-use Hexadog\MenusManager\MenusManager;
-use Illuminate\Foundation\AliasLoader;
-use Illuminate\Support\ServiceProvider;
 use Hexadog\MenusManager\Facades\Menus as MenusFacade;
 use Hexadog\MenusManager\Facades\MenusManager as MenusManagerFacade;
+use Hexadog\MenusManager\MenusManager;
+use Illuminate\Foundation\AliasLoader;
+use Illuminate\Routing\Router;
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
+use ReflectionClass;
 
 class PackageServiceProvider extends ServiceProvider
 {
@@ -69,7 +69,7 @@ class PackageServiceProvider extends ServiceProvider
             Components\Header::class,
             Components\Icon::class,
             Components\Item::class,
-            Components\Menu::class
+            Components\Menu::class,
         ]);
     }
 

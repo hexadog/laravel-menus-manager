@@ -41,7 +41,7 @@ class MenusManager
      */
     public function register($name): Menu
     {
-        if (!$menu = $this->get($name)) {
+        if (! $menu = $this->get($name)) {
             $menu = new Menu($name);
 
             $this->menus->put($name, $menu);
@@ -60,8 +60,8 @@ class MenusManager
      */
     public function __call($method_name, $args)
     {
-        if (!method_exists($this, $method_name)) {
-            return call_user_func_array(array($this->menus, $method_name), $args);
+        if (! method_exists($this, $method_name)) {
+            return call_user_func_array([$this->menus, $method_name], $args);
         }
     }
 }
