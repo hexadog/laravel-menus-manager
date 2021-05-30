@@ -14,16 +14,16 @@ use Illuminate\Support\HtmlString;
 class Item implements Arrayable
 {
     use HasItems;
-    
+
     /**
-     * Item parent
+     * Item parent.
      *
      * @var mixed
      */
-    protected $parent = null;
+    protected $parent;
 
     /**
-     * Item properties
+     * Item properties.
      *
      * @var array
      */
@@ -38,16 +38,15 @@ class Item implements Arrayable
     ];
 
     /**
-     * The hide callbacks collection
+     * The hide callbacks collection.
      *
      * @var \Illuminate\Support\Collection
      */
     protected $visibleCallbacks;
-    
+
     /**
      * Constructor.
      *
-     * @param array $properties
      * @param mixed $parent
      */
     public function __construct(array $properties = [], $parent = null)
@@ -56,7 +55,7 @@ class Item implements Arrayable
         $this->items = collect();
 
         $this->parent = $parent;
-        
+
         // Generate id attribute if not provided
         if (is_null(Arr::get($properties, 'attributes.id'))) {
             Arr::set($properties, 'attributes.id', str_replace('.', '', uniqid('id-', true)));
@@ -66,7 +65,7 @@ class Item implements Arrayable
     }
 
     /**
-     * Get item attribute
+     * Get item attribute.
      *
      * @param string $key
      *
@@ -74,17 +73,18 @@ class Item implements Arrayable
      */
     public function __get($key)
     {
-        if ($key === 'properties') {
+        if ('properties' === $key) {
             return $this->properties;
         }
 
         return Arr::get($this->properties, $key);
     }
-    
+
     /**
-     * Set item attribute
+     * Set item attribute.
      *
      * @param string $key
+     * @param mixed  $value
      *
      * @return mixed
      */
@@ -92,11 +92,9 @@ class Item implements Arrayable
     {
         return Arr::set($this->properties, $key, $value);
     }
-    
+
     /**
-     * Set the current item as header
-     *
-     * @return Item
+     * Set the current item as header.
      */
     public function asHeader(): Item
     {
@@ -104,11 +102,9 @@ class Item implements Arrayable
             'type' => 'header',
         ]);
     }
-    
+
     /**
-     * Set the current item as divider
-     *
-     * @return Item
+     * Set the current item as divider.
      */
     public function asDivider(): Item
     {
@@ -116,11 +112,9 @@ class Item implements Arrayable
             'type' => 'divider',
         ]);
     }
-    
+
     /**
-     * Get the curent item children
-     *
-     * @return Collection
+     * Get the curent item children.
      */
     public function children(): Collection
     {
@@ -130,11 +124,9 @@ class Item implements Arrayable
     }
 
     /**
-     * Fill the item properties
+     * Fill the item properties.
      *
      * @param array $properties
-     *
-     * @return Item
      */
     public function fill($properties): Item
     {
@@ -144,7 +136,7 @@ class Item implements Arrayable
     }
 
     /**
-     * Get the item attributes as HTML String
+     * Get the item attributes as HTML String.
      *
      * @param mixed $except
      *
@@ -156,16 +148,15 @@ class Item implements Arrayable
     }
 
     /**
-     * Get item url
-     *
-     * @return string
+     * Get item url.
      */
     public function getUrl(): string
     {
         if ($this->route) {
             if (is_array($this->route)) {
                 return URL::route(Arr::get($this->route, 0), Arr::get($this->route, 1, []));
-            } elseif (is_string($this->route)) {
+            }
+            if (is_string($this->route)) {
                 return URL::route($this->route);
             }
         }
@@ -173,18 +164,16 @@ class Item implements Arrayable
         if ($this->url) {
             if (is_array($this->route)) {
                 return URL::to(Arr::get($this->url, 0), Arr::get($this->url, 1, []), true);
-            } else {
-                return URL::to($this->url, [], true);
             }
+
+            return URL::to($this->url, [], true);
         }
 
         return '';
     }
-    
+
     /**
-     * Check if the current item has children
-     *
-     * @return bool
+     * Check if the current item has children.
      */
     public function hasChildren(): bool
     {
@@ -192,25 +181,24 @@ class Item implements Arrayable
     }
 
     /**
-     * Check if icon is set for the current item
-     *
-     * @return bool
+     * Check if icon is set for the current item.
      */
     public function hasIcon(): bool
     {
-        return ! is_null($this->icon);
+        return !is_null($this->icon);
     }
 
     /**
      * Check if item is active
-     * If a child is active then item is active too
+     * If a child is active then item is active too.
      */
     public function isActive()
     {
         if ($this->route) {
             if (is_array($this->route)) {
                 return Route::is(Arr::get($this->route, 0));
-            } elseif (is_string($this->route)) {
+            }
+            if (is_string($this->route)) {
                 return Route::is($this->route);
             }
         }
@@ -225,39 +213,31 @@ class Item implements Arrayable
     }
 
     /**
-     * Check if the current item is divider
-     *
-     * @return bool
+     * Check if the current item is divider.
      */
     public function isDivider(): bool
     {
-        return $this->type === 'divider';
+        return 'divider' === $this->type;
     }
 
     /**
-     * Check if the current item is header
-     *
-     * @return bool
+     * Check if the current item is header.
      */
     public function isHeader(): bool
     {
-        return $this->type === 'header';
-    }
-    
-    /**
-     * Check if the current item is hidden
-     *
-     * @return bool
-     */
-    public function isHidden(): bool
-    {
-        return ! $this->isVisible();
+        return 'header' === $this->type;
     }
 
     /**
-     * Check if the current item is visible
-     *
-     * @return bool
+     * Check if the current item is hidden.
+     */
+    public function isHidden(): bool
+    {
+        return !$this->isVisible();
+    }
+
+    /**
+     * Check if the current item is visible.
      */
     public function isVisible(): bool
     {
@@ -267,11 +247,7 @@ class Item implements Arrayable
     }
 
     /**
-     * Set the current item icon
-     *
-     * @param string $icon
-     *
-     * @return Item
+     * Set the current item icon.
      */
     public function icon(string $icon): Item
     {
@@ -281,31 +257,25 @@ class Item implements Arrayable
     }
 
     /**
-     * Set visible callback for current menu item
+     * Set visible callback for current menu item.
      *
      * @param mixed $callback
-     *
-     * @return Item
      */
     public function if($callback): Item
     {
-        if (! is_callable($callback)) {
+        if (!is_callable($callback)) {
             $callback = function () use ($callback) {
                 return $callback;
             };
         }
-        
+
         $this->visibleCallbacks->push($callback);
 
         return $this;
     }
 
     /**
-     * Set the current item order
-     *
-     * @param int $order
-     *
-     * @return Item
+     * Set the current item order.
      */
     public function order(int $order = 0): Item
     {
@@ -315,7 +285,7 @@ class Item implements Arrayable
     }
 
     /**
-     * Get Item parent
+     * Get Item parent.
      *
      * @return mixed
      */
@@ -325,10 +295,10 @@ class Item implements Arrayable
     }
 
     /**
-     * Search item by key and value recursively
+     * Search item by key and value recursively.
      *
-     * @param string $key
-     * @param string $value
+     * @param string   $key
+     * @param string   $value
      * @param callable $callback
      *
      * @return mixed
@@ -353,24 +323,6 @@ class Item implements Arrayable
 
         return $matchItem;
     }
-    
-    /**
-     * Return attributes in html format
-     *
-     * @param  array $attributes
-     *
-     * @return string
-     */
-    private function htmlAttributes($attributes)
-    {
-        return new HtmlString(join(' ', array_map(function ($key) use ($attributes) {
-            if (is_bool($attributes[$key])) {
-                return $attributes[$key] ? $key : '';
-            }
-
-            return $key . '="' . $attributes[$key] . '"';
-        }, array_keys($attributes))));
-    }
 
     /**
      * Get the instance as an array.
@@ -389,5 +341,23 @@ class Item implements Arrayable
             'type' => $this->type,
             'url' => $this->getUrl(),
         ];
+    }
+
+    /**
+     * Return attributes in html format.
+     *
+     * @param array $attributes
+     *
+     * @return string
+     */
+    private function htmlAttributes($attributes)
+    {
+        return new HtmlString(join(' ', array_map(function ($key) use ($attributes) {
+            if (is_bool($attributes[$key])) {
+                return $attributes[$key] ? $key : '';
+            }
+
+            return $key.'="'.$attributes[$key].'"';
+        }, array_keys($attributes))));
     }
 }

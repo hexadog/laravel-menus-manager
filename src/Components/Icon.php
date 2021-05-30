@@ -8,25 +8,21 @@ use Illuminate\View\Component;
 class Icon extends Component
 {
     /**
-     * The item icon
+     * The item icon.
      *
      * @var string
      */
     public $icon;
 
     /**
-     * The item
+     * The item.
      *
      * @var Item
      */
     public $item;
 
     /**
-     * Create the component instance
-     *
-     * @param  Item  $item
-     *
-     * @return void
+     * Create the component instance.
      */
     public function __construct(Item $item)
     {
@@ -35,7 +31,7 @@ class Icon extends Component
     }
 
     /**
-     * Get the view / contents that represents the component
+     * Get the view / contents that represents the component.
      *
      * @return \Illuminate\View\View
      */

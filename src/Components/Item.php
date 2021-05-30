@@ -8,17 +8,14 @@ use Illuminate\View\Component;
 class Item extends Component
 {
     /**
-     * The item
+     * The item.
      *
      * @var Item
      */
     public $item;
 
     /**
-     * Create the component instance
-     *
-     * @param  MenusManagerItem  $item
-     * @return void
+     * Create the component instance.
      */
     public function __construct(MenusManagerItem $item)
     {
@@ -26,7 +23,7 @@ class Item extends Component
     }
 
     /**
-     * Get the view / contents that represents the component
+     * Get the view / contents that represents the component.
      *
      * @return \Illuminate\View\View
      */

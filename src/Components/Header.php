@@ -8,18 +8,14 @@ use Illuminate\View\Component;
 class Header extends Component
 {
     /**
-     * The item
+     * The item.
      *
      * @var Item
      */
     public $item;
 
     /**
-     * Create the component instance
-     *
-     * @param  Item  $item
-     *
-     * @return void
+     * Create the component instance.
      */
     public function __construct(Item $item)
     {
@@ -27,7 +23,7 @@ class Header extends Component
     }
 
     /**
-     * Get the view / contents that represents the component
+     * Get the view / contents that represents the component.
      *
      * @return \Illuminate\View\View
      */

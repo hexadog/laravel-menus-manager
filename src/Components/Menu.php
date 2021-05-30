@@ -9,25 +9,25 @@ use Illuminate\View\Component;
 class Menu extends Component
 {
     /**
-     * The menu items
+     * The menu items.
      *
      * @var Collection
      */
     public $items;
-   
+
     /**
-     * The menu
+     * The menu.
      *
      * @var string
      */
     public $menu;
 
     /**
-     * Create the component instance
+     * Create the component instance.
      *
-     * @param  string  $type
-     * @param  string  $message
-     * @return void
+     * @param string $type
+     * @param string $message
+     * @param mixed  $name
      */
     public function __construct($name)
     {
@@ -36,7 +36,7 @@ class Menu extends Component
     }
 
     /**
-     * Get the view / contents that represents the component
+     * Get the view / contents that represents the component.
      *
      * @return \Illuminate\View\View
      */
