@@ -7,8 +7,7 @@ $finder = PhpCsFixer\Finder::create()
     ->notPath('storage/*')
     ->notPath('node_modules/*')
     ->in([
-        __DIR__ . '/config',
-        __DIR__ . '/src',
+        __DIR__.'/src',
     ])
     ->name('*.php')
     ->notName('*.blade.php')
@@ -16,6 +15,7 @@ $finder = PhpCsFixer\Finder::create()
     ->ignoreVCS(true);
 
 $config = new PhpCsFixer\Config();
+
 return $config
     ->setRules([
         '@PSR2' => true,
