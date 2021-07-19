@@ -8,17 +8,14 @@ use Illuminate\View\Component;
 class Children extends Component
 {
     /**
-     * The item items
+     * The item items.
      *
      * @var Collection
      */
     public $items;
 
     /**
-     * Create the component instance
-     *
-     * @param  Collection  $items
-     * @return void
+     * Create the component instance.
      */
     public function __construct(Collection $items)
     {
@@ -26,7 +23,7 @@ class Children extends Component
     }
 
     /**
-     * Get the view / contents that represents the component
+     * Get the view / contents that represents the component.
      *
      * @return \Illuminate\View\View
      */

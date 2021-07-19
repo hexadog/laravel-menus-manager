@@ -15,48 +15,22 @@ use ReflectionClass;
 class PackageServiceProvider extends ServiceProvider
 {
     /**
-     * Our root directory for this package to make traversal easier
+     * Our root directory for this package to make traversal easier.
      */
-    const PACKAGE_DIR = __DIR__ . '/../../';
+    public const PACKAGE_DIR = __DIR__ . '/../../';
 
     /**
-     * Name for this package to publish assets
+     * Name for this package to publish assets.
      */
-    const PACKAGE_NAME = 'menus-manager';
+    public const PACKAGE_NAME = 'menus-manager';
 
     /**
-     * Pblishers list
+     * Pblishers list.
      */
     protected $publishers = [];
 
     /**
-     * Get Package absolute path
-     *
-     * @param string $path
-     * @return void
-     */
-    protected function getPath($path = '')
-    {
-        // We get the child class
-        $rc = new ReflectionClass(get_class($this));
-
-        return dirname($rc->getFileName()) . '/../../' . $path;
-    }
-
-    /**
-     * Get Module normalized namespace
-     *
-     * @return void
-     */
-    protected function getNormalizedNamespace($prefix = '')
-    {
-        return Str::start(Str::lower(self::PACKAGE_NAME), $prefix);
-    }
-
-    /**
      * Bootstrap the application events.
-     *
-     * @return void
      */
     public function boot(Router $router)
     {
@@ -87,16 +61,6 @@ class PackageServiceProvider extends ServiceProvider
     }
 
     /**
-     * Bootstrap our Publishers
-     */
-    protected function strapPublishers()
-    {
-        $this->publishes([
-            $this->getPath('resources/views') => resource_path('views/vendor/menus-manager'),
-        ], 'views');
-    }
-
-    /**
      * Get the services provided by the provider.
      *
      * @return array
@@ -104,5 +68,38 @@ class PackageServiceProvider extends ServiceProvider
     public function provides()
     {
         return [MenusManager::class];
+    }
+
+    /**
+     * Get Package absolute path.
+     *
+     * @param string $path
+     */
+    protected function getPath($path = '')
+    {
+        // We get the child class
+        $rc = new ReflectionClass(get_class($this));
+
+        return dirname($rc->getFileName()) . '/../../' . $path;
+    }
+
+    /**
+     * Get Module normalized namespace.
+     *
+     * @param mixed $prefix
+     */
+    protected function getNormalizedNamespace($prefix = '')
+    {
+        return Str::start(Str::lower(self::PACKAGE_NAME), $prefix);
+    }
+
+    /**
+     * Bootstrap our Publishers.
+     */
+    protected function strapPublishers()
+    {
+        $this->publishes([
+            $this->getPath('resources/views') => resource_path('views/vendor/menus-manager'),
+        ], 'views');
     }
 }

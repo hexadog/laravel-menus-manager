@@ -8,32 +8,43 @@ use Illuminate\Support\Collection;
 trait HasItems
 {
     /**
-     * The items collection
+     * The items collection.
      *
      * @var Collection
      */
     protected $items;
 
     /**
-     * Add new item
+     * Magic method to manipulate items Collection with ease.
      *
-     * @param array $attributes
-     *
-     * @return Item
+     * @param string $method_name
+     * @param array  $args
+     */
+    public function __call($method_name, $args)
+    {
+        if (!method_exists($this, $method_name)) {
+            return call_user_func_array([$this->items, $method_name], $args);
+        }
+    }
+
+    /**
+     * Add new item.
      */
     public function add(array $attributes = []): Item
     {
-        $this->items->push($item = new Item($attributes, $this));
+        $item = new Item($attributes, $this);
+
+        if (!array_key_exists('order', $attributes)) {
+            $item->order = count($this->items);
+        }
+
+        $this->items->push($item);
 
         return $item;
     }
 
     /**
-     * Add new divider menu item
-     *
-     * @param array $attributes
-     *
-     * @return Item
+     * Add new divider menu item.
      */
     public function divider(array $attributes = []): Item
     {
@@ -41,10 +52,7 @@ trait HasItems
     }
 
     /**
-     * Find item by key and value
-     *
-     * @param string $key
-     * @param string $value
+     * Find item by key and value.
      *
      * @return mixed
      */
@@ -56,16 +64,13 @@ trait HasItems
     }
 
     /**
-     * Find item by given title or add it
-     *
-     * @param string   $title
-     * @param array    $attributes
+     * Find item by given title or add it.
      *
      * @return mixed
      */
     public function findByTitleOrAdd(string $title, array $attributes = []): ?Item
     {
-        if (! ($item = $this->findBy('title', $title))) {
+        if (!($item = $this->findBy('title', $title))) {
             $item = $this->add(compact('title', 'attributes'));
         }
 
@@ -73,12 +78,7 @@ trait HasItems
     }
 
     /**
-     * Add new header menu item
-     *
-     * @param string $title
-     * @param array  $attributes
-     *
-     * @return Item
+     * Add new header menu item.
      */
     public function header(string $title, array $attributes = []): Item
     {
@@ -86,7 +86,7 @@ trait HasItems
     }
 
     /**
-     * Get items
+     * Get items.
      *
      * @return Collection
      */
@@ -96,15 +96,11 @@ trait HasItems
             return $item->order;
         });
     }
-    
+
     /**
-     * Register new menu item using registered route
+     * Register new menu item using registered route.
      *
      * @param mixed $route
-     * @param string $title
-     * @param array  $attributes
-     *
-     * @return Item
      */
     public function route($route, string $title, array $attributes = []): Item
     {
@@ -112,31 +108,10 @@ trait HasItems
     }
 
     /**
-     * Register new menu item using url
-     *
-     * @param string $url
-     * @param string $title
-     * @param array  $attributes
-     *
-     * @return Item
+     * Register new menu item using url.
      */
     public function url(string $url, string $title, array $attributes = []): Item
     {
         return $this->add(compact('url', 'title', 'attributes'));
-    }
-
-    /**
-     * Magic method to manipulate items Collection with ease
-     *
-     * @param string $method_name
-     * @param array $args
-     *
-     * @return void
-     */
-    public function __call($method_name, $args)
-    {
-        if (! method_exists($this, $method_name)) {
-            return call_user_func_array([$this->items, $method_name], $args);
-        }
     }
 }

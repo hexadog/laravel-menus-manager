@@ -10,14 +10,14 @@ class Menu implements Arrayable
     use HasItems;
 
     /**
-     * The menu name
+     * The menu name.
      *
      * @var string
      */
     protected $name;
 
     /**
-     * Create a new Menu instance
+     * Create a new Menu instance.
      */
     public function __construct(string $name)
     {
@@ -26,10 +26,10 @@ class Menu implements Arrayable
     }
 
     /**
-     * Search item by key and value recursively
+     * Search item by key and value recursively.
      *
-     * @param string $key
-     * @param string $value
+     * @param string   $key
+     * @param string   $value
      * @param callable $callback
      *
      * @return mixed
