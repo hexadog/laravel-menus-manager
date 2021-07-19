@@ -30,7 +30,7 @@ class Item implements Arrayable
     protected $properties = [
         'attributes' => [],
         'icon' => null,
-        'order' => 9000,
+        'order' => 0,
         'route' => null,
         'title' => '',
         'type' => 'link', // link | divider | header
@@ -357,7 +357,7 @@ class Item implements Arrayable
                 return $attributes[$key] ? $key : '';
             }
 
-            return $key.'="'.$attributes[$key].'"';
+            return $key . '="' . $attributes[$key] . '"';
         }, array_keys($attributes))));
     }
 }
