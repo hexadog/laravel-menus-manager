@@ -17,7 +17,7 @@ class PackageServiceProvider extends ServiceProvider
     /**
      * Our root directory for this package to make traversal easier.
      */
-    public const PACKAGE_DIR = __DIR__.'/../../';
+    public const PACKAGE_DIR = __DIR__ . '/../../';
 
     /**
      * Name for this package to publish assets.
@@ -80,7 +80,7 @@ class PackageServiceProvider extends ServiceProvider
         // We get the child class
         $rc = new ReflectionClass(get_class($this));
 
-        return dirname($rc->getFileName()).'/../../'.$path;
+        return dirname($rc->getFileName()) . '/../../' . $path;
     }
 
     /**
