@@ -8,37 +8,38 @@ use Illuminate\Support\Collection;
 trait HasItems
 {
     /**
-     * The items collection.
+     * The items collection
      *
      * @var Collection
      */
     protected $items;
 
     /**
-     * Magic method to manipulate items Collection with ease.
+     * Add new item
      *
-     * @param string $method_name
-     * @param array  $args
-     */
-    public function __call($method_name, $args)
-    {
-        if (!method_exists($this, $method_name)) {
-            return call_user_func_array([$this->items, $method_name], $args);
-        }
-    }
-
-    /**
-     * Add new item.
+     * @param array $attributes
+     *
+     * @return Item
      */
     public function add(array $attributes = []): Item
     {
-        $this->items->push($item = new Item($attributes, $this));
+        $item = new Item($attributes, $this);
+
+        if (!array_key_exists('order', $attributes)) {
+            $item->order = count($this->items);
+        }
+
+        $this->items->push($item);
 
         return $item;
     }
 
     /**
-     * Add new divider menu item.
+     * Add new divider menu item
+     *
+     * @param array $attributes
+     *
+     * @return Item
      */
     public function divider(array $attributes = []): Item
     {
@@ -46,7 +47,10 @@ trait HasItems
     }
 
     /**
-     * Find item by key and value.
+     * Find item by key and value
+     *
+     * @param string $key
+     * @param string $value
      *
      * @return mixed
      */
@@ -58,7 +62,10 @@ trait HasItems
     }
 
     /**
-     * Find item by given title or add it.
+     * Find item by given title or add it
+     *
+     * @param string   $title
+     * @param array    $attributes
      *
      * @return mixed
      */
@@ -72,7 +79,12 @@ trait HasItems
     }
 
     /**
-     * Add new header menu item.
+     * Add new header menu item
+     *
+     * @param string $title
+     * @param array  $attributes
+     *
+     * @return Item
      */
     public function header(string $title, array $attributes = []): Item
     {
@@ -80,7 +92,7 @@ trait HasItems
     }
 
     /**
-     * Get items.
+     * Get items
      *
      * @return Collection
      */
@@ -92,9 +104,13 @@ trait HasItems
     }
 
     /**
-     * Register new menu item using registered route.
+     * Register new menu item using registered route
      *
      * @param mixed $route
+     * @param string $title
+     * @param array  $attributes
+     *
+     * @return Item
      */
     public function route($route, string $title, array $attributes = []): Item
     {
@@ -102,10 +118,31 @@ trait HasItems
     }
 
     /**
-     * Register new menu item using url.
+     * Register new menu item using url
+     *
+     * @param string $url
+     * @param string $title
+     * @param array  $attributes
+     *
+     * @return Item
      */
     public function url(string $url, string $title, array $attributes = []): Item
     {
         return $this->add(compact('url', 'title', 'attributes'));
+    }
+
+    /**
+     * Magic method to manipulate items Collection with ease
+     *
+     * @param string $method_name
+     * @param array $args
+     *
+     * @return void
+     */
+    public function __call($method_name, $args)
+    {
+        if (!method_exists($this, $method_name)) {
+            return call_user_func_array([$this->items, $method_name], $args);
+        }
     }
 }
