@@ -7,7 +7,6 @@ use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\HtmlString;
 
@@ -208,6 +207,7 @@ class Item implements Arrayable
         }
 
         $path = ltrim(str_replace(url('/'), '', $this->getUrl()), '/');
+
         return Request::is(
             $path,
             $path . '/*'
