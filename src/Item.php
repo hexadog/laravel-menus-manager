@@ -7,7 +7,6 @@ use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\HtmlString;
 
@@ -34,7 +33,7 @@ class Item implements Arrayable
         'route' => null,
         'title' => '',
         'type' => 'link', // link | divider | header
-        'url' => null,
+        'url' => '#',
     ];
 
     /**
@@ -144,7 +143,7 @@ class Item implements Arrayable
      */
     public function getAttributes($except = null)
     {
-        return $this->htmlAttributes(Arr::except($this->attributes, $except));
+        return $this->htmlAttributes(Arr::except($this->properties['attributes'], $except));
     }
 
     /**
@@ -156,6 +155,7 @@ class Item implements Arrayable
             if (is_array($this->route)) {
                 return URL::route(Arr::get($this->route, 0), Arr::get($this->route, 1, []));
             }
+
             if (is_string($this->route)) {
                 return URL::route($this->route);
             }
@@ -169,7 +169,7 @@ class Item implements Arrayable
             return URL::to($this->url, [], true);
         }
 
-        return '';
+        return '#';
     }
 
     /**
@@ -194,22 +194,49 @@ class Item implements Arrayable
      */
     public function isActive()
     {
-        if ($this->route) {
-            if (is_array($this->route)) {
-                return Route::is(Arr::get($this->route, 0));
-            }
-            if (is_string($this->route)) {
-                return Route::is($this->route);
+        // Check if one of the children is active
+        foreach ($this->children() as $child) {
+            if ($child->isActive()) {
+                return true;
             }
         }
 
-        if ($this->url) {
-            return Request::is($this->url);
+        // Custom set active path
+        if ($path = $this->getActiveWhen()) {
+            return Request::is($path);
         }
 
-        return $this->children()->contains(function ($child) {
-            return $child->isActive();
-        }) ?? false;
+        $path = ltrim(str_replace(url('/'), '', $this->getUrl()), '/');
+
+        return Request::is(
+            $path,
+            $path . '/*'
+        );
+    }
+
+    /**
+     * @param string $path
+     *
+     * @return $this
+     */
+    public function isActiveWhen($path)
+    {
+        // Remove unwanted chars
+        $path = ltrim($path, '/');
+        $path = rtrim($path, '/');
+        $path = rtrim($path, '?');
+
+        $this->activeWhen = $path;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getActiveWhen()
+    {
+        return $this->activeWhen;
     }
 
     /**
