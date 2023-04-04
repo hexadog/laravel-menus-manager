@@ -25,7 +25,7 @@ class Item extends Component
     /**
      * Get the view / contents that represents the component.
      *
-     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\Support\Htmlable|\Closure|string
+     * @return \Closure|\Illuminate\Contracts\Support\Htmlable|\Illuminate\Contracts\View\View|string
      */
     public function render()
     {
