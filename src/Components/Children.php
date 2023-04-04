@@ -25,7 +25,7 @@ class Children extends Component
     /**
      * Get the view / contents that represents the component.
      *
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\Support\Htmlable|\Closure|string
      */
     public function render()
     {
