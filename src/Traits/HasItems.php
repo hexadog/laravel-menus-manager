@@ -2,6 +2,7 @@
 
 namespace Hexadog\MenusManager\Traits;
 
+use Closure;
 use Hexadog\MenusManager\Item;
 use Illuminate\Support\Collection;
 
@@ -68,9 +69,9 @@ trait HasItems
      *
      * @return mixed
      */
-    public function findByTitleOrAdd(string $title, array $attributes = []): ?Item
+    public function findByTitleOrAdd(string|Closure $title, array $attributes = []): ?Item
     {
-        if (!($item = $this->findBy('title', $title))) {
+        if (!($item = $this->findBy('title', $title instanceof Closure ? $title() : $title))) {
             $item = $this->add(compact('title', 'attributes'));
         }
 
@@ -80,7 +81,7 @@ trait HasItems
     /**
      * Add new header menu item.
      */
-    public function header(string $title, array $attributes = []): Item
+    public function header(string|Closure $title, array $attributes = []): Item
     {
         return $this->add(compact('title', 'attributes'))->asHeader();
     }
@@ -102,7 +103,7 @@ trait HasItems
      *
      * @param mixed $route
      */
-    public function route($route, string $title, array $attributes = []): Item
+    public function route($route, string|Closure $title, array $attributes = []): Item
     {
         return $this->add(compact('route', 'title', 'attributes'));
     }
@@ -110,7 +111,7 @@ trait HasItems
     /**
      * Register new menu item using url.
      */
-    public function url(string $url, string $title, array $attributes = []): Item
+    public function url(string $url, string|Closure $title, array $attributes = []): Item
     {
         return $this->add(compact('url', 'title', 'attributes'));
     }
