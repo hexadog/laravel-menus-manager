@@ -69,7 +69,7 @@ trait HasItems
      *
      * @return mixed
      */
-    public function findByTitleOrAdd(string|Closure $title, array $attributes = []): ?Item
+    public function findByTitleOrAdd(string|\Closure $title, array $attributes = []): ?Item
     {
         if (!($item = $this->findBy('title', $title instanceof Closure ? $title() : $title))) {
             $item = $this->add(compact('title', 'attributes'));

@@ -331,9 +331,8 @@ class Item implements Arrayable
     /**
      * Search item by key and value recursively.
      *
-     * @param string   $key
-     * @param string   $value
-     * @param callable $callback
+     * @param string $key
+     * @param string $value
      *
      * @return mixed
      */

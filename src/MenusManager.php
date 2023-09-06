@@ -45,10 +45,7 @@ class MenusManager
     /**
      * Register a menu or get the existing one.
      *
-     * @param string   $name
-     * @param \Closure $callback
-     *
-     * @return \Hexadog\MenusManager\Menu
+     * @param string $name
      */
     public function register($name): Menu
     {

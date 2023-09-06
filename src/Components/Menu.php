@@ -25,9 +25,7 @@ class Menu extends Component
     /**
      * Create the component instance.
      *
-     * @param string $type
-     * @param string $message
-     * @param mixed  $name
+     * @param mixed $name
      */
     public function __construct($name)
     {
