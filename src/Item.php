@@ -2,7 +2,6 @@
 
 namespace Hexadog\MenusManager;
 
-use Closure;
 use Hexadog\MenusManager\Traits\HasItems;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Arr;
@@ -79,7 +78,7 @@ class Item implements Arrayable
 
         $value = Arr::get($this->properties, $key);
 
-        if ($value instanceof Closure) {
+        if ($value instanceof \Closure) {
             $value = $value();
         }
 
@@ -331,9 +330,8 @@ class Item implements Arrayable
     /**
      * Search item by key and value recursively.
      *
-     * @param string   $key
-     * @param string   $value
-     * @param callable $callback
+     * @param string $key
+     * @param string $value
      *
      * @return mixed
      */
