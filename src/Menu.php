@@ -33,7 +33,7 @@ class Menu implements Arrayable
      *
      * @return mixed
      */
-    public function searchBy($key, $value, callable $callback = null): ?Item
+    public function searchBy($key, $value, ?callable $callback = null): ?Item
     {
         $matchItem = null;
 

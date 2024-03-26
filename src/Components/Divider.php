@@ -3,6 +3,8 @@
 namespace Hexadog\MenusManager\Components;
 
 use Hexadog\MenusManager\Item;
+use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 class Divider extends Component
@@ -25,7 +27,7 @@ class Divider extends Component
     /**
      * Get the view / contents that represents the component.
      *
-     * @return \Closure|\Illuminate\Contracts\Support\Htmlable|\Illuminate\Contracts\View\View|string
+     * @return \Closure|Htmlable|string|View
      */
     public function render()
     {

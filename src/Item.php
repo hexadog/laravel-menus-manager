@@ -2,7 +2,6 @@
 
 namespace Hexadog\MenusManager;
 
-use Closure;
 use Hexadog\MenusManager\Traits\HasItems;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Arr;
@@ -40,7 +39,7 @@ class Item implements Arrayable
     /**
      * The hide callbacks collection.
      *
-     * @var \Illuminate\Support\Collection
+     * @var Collection
      */
     protected $visibleCallbacks;
 
@@ -79,7 +78,7 @@ class Item implements Arrayable
 
         $value = Arr::get($this->properties, $key);
 
-        if ($value instanceof Closure) {
+        if ($value instanceof \Closure) {
             $value = $value();
         }
 
@@ -336,7 +335,7 @@ class Item implements Arrayable
      *
      * @return mixed
      */
-    public function searchBy($key, $value, callable $callback = null): ?Item
+    public function searchBy($key, $value, ?callable $callback = null): ?Item
     {
         $matchItem = null;
 
