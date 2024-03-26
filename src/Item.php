@@ -39,7 +39,7 @@ class Item implements Arrayable
     /**
      * The hide callbacks collection.
      *
-     * @var \Illuminate\Support\Collection
+     * @var Collection
      */
     protected $visibleCallbacks;
 
@@ -335,7 +335,7 @@ class Item implements Arrayable
      *
      * @return mixed
      */
-    public function searchBy($key, $value, callable $callback = null): ?Item
+    public function searchBy($key, $value, ?callable $callback = null): ?Item
     {
         $matchItem = null;
 
